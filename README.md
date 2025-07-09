@@ -1,12 +1,17 @@
-# React + Vite
+# SEG 3125 Dashboard Edward-Joseph Fattouch
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Hello there! This is the main repo for my dashboard.
 
-Currently, two official plugins are available:
+Technologies Used:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React
+- Vite
+- TailwindCSS
+- DaisyUI
+- mapbox
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Data Source:
+
+- [WRI Global Power Plant Database
+](https://datasets.wri.org/datasets/global-power-plant-database?map=eyJ2aWV3U3RhdGUiOnsibG9uZ2l0dWRlIjotNzMuNTA2NzE5MDY0NTI5ODIsImxhdGl0dWRlIjoyMi45ODM4MjE4NDAxNTEzMDcsInpvb20iOjQuNDA1NjMwNDM0NDUzNTM2LCJwaXRjaCI6MCwiYmVhcmluZyI6MCwicGFkZGluZyI6eyJ0b3AiOjAsImJvdHRvbSI6MCwibGVmdCI6MCwicmlnaHQiOjB9fSwiYmFzZW1hcCI6ImxpZ2h0IiwiYm91bmRhcmllcyI6ZmFsc2UsImxhYmVscyI6ImRhcmsiLCJhY3RpdmVMYXllckdyb3VwcyI6W3siZGF0YXNldElkIjoiNTM2MjNkZmQtM2RmNi00ZjE1LWEwOTEtNjc0NTdjZGI1NzFmIiwibGF5ZXJzIjpbIjJhNjk0Mjg5LWZlYzktNGJmZS1hNmQyLTU2YzM4NjRlYzM0OSJdfV0sImJvdW5kcyI6eyJiYm94IjpudWxsLCJvcHRpb25zIjp7fX0sImxheWVyc1BhcnNlZCI6W1siMmE2OTQyODktZmVjOS00YmZlLWE2ZDItNTZjMzg2NGVjMzQ5Iix7InZpc2liaWxpdHkiOnRydWUsImFjdGl2ZSI6dHJ1ZSwib3BhY2l0eSI6MSwiekluZGV4IjoxMX1dXX0%3D)
