@@ -1,21 +1,15 @@
 import {useEffect, useState} from "react";
-import useFetch from "@/hooks/useFetch.jsx";
-import {Search, ChevronUp, ChevronDown, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight} from "lucide-react";
+import {Search, ChevronUp, ChevronDown} from "lucide-react";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge"
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import {useTranslation} from "react-i18next";
-import {cn} from "@/lib/util.js";
+import DataPagination from "@/components/DataPagination.jsx";
 
 
-const DataGrid = ({onSummaryReady}) => {
+const DataGrid = ({data, filterData}) => {
     const {t} = useTranslation();
-
-    const { fetchCsvData } = useFetch();
-    const [data, setData] = useState([]);
-
-    const [filterData, setFilterData] = useState({countries: [], fuelTypes: []});
 
     const [searchTerm, setSearchTerm] = useState("")
     const [filterCountry, setFilterCountry] = useState("all");
@@ -27,40 +21,10 @@ const DataGrid = ({onSummaryReady}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 50;
 
-    useEffect(() => {
-        fetchCsvData("/data/global_power_plant_database.csv", setData);
-    }, [])
 
     useEffect(() => {
-        let total_capacity = 0;
-        const countryList = new Set();
-        const fuelList = new Set();
-
-
-        for (const dataObj of data) {
-            const capacity = parseFloat(dataObj.capacity_mw);
-            const country = dataObj.country_long;
-            const fuel = dataObj.primary_fuel;
-
-            // Data has already been verified, if issues arrise add data validation here
-            total_capacity += capacity;
-            countryList.add(country);
-            fuelList.add(fuel);
-        }
-
-        setFilterData({countries: [...countryList], fuelTypes: [...fuelList]});
-
         setCurrentPage(1);
-        if (data.length > 0 && onSummaryReady) {
-            onSummaryReady({
-                totalCapacity: Math.round(total_capacity),
-                totalPlants: data.length,
-                countries: countryList,
-                fuels: fuelList,
-            })
-        }
     }, [data]);
-
 
     const getTypeColor =  (type) => {
         switch (type) {
@@ -147,8 +111,8 @@ const DataGrid = ({onSummaryReady}) => {
                     bValue = b.primary_fuel.toLowerCase()
                     break
                 case "capacity":
-                    aValue = a.capacity_mw
-                    bValue = b.capacity_mw
+                    aValue = parseFloat(a.capacity_mw);
+                    bValue = parseFloat(b.capacity_mw);
                     break
                 default:
                     return 0
@@ -163,9 +127,7 @@ const DataGrid = ({onSummaryReady}) => {
             return 0
         })
 
-
-    let maxPage = Math.floor(sortedAndFilteredGenerators.length / itemsPerPage) + 1;
-
+    const maxPage = Math.floor(sortedAndFilteredGenerators.length / itemsPerPage) + 1;
 
     return (
         <div className={"space-y-4"}>
@@ -175,12 +137,12 @@ const DataGrid = ({onSummaryReady}) => {
                     <Input
                         placeholder={t("search_placeholder")}
                         value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onChange={(e) => {setSearchTerm(e.target.value); setCurrentPage(1)}}
                         className="pl-10"
                     />
                 </div>
 
-                <Select value={filterFuelType} onValueChange={setFilterFuelType}>
+                <Select value={filterFuelType} onValueChange={(value) => {setFilterFuelType(value); setCurrentPage(1)}}>
                     <SelectTrigger className="w-full sm:w-[180px]">
                         <SelectValue placeholder={t("filter_by_type")} />
                     </SelectTrigger>
@@ -194,7 +156,7 @@ const DataGrid = ({onSummaryReady}) => {
                     </SelectContent>
                 </Select>
 
-                <Select value={filterCountry} onValueChange={setFilterCountry}>
+                <Select value={filterCountry} onValueChange={(value) => {setFilterCountry(value); setCurrentPage(1)}}>
                     <SelectTrigger className="w-full sm:w-[180px]">
                         <SelectValue placeholder={t("filter_by_country")} />
                     </SelectTrigger>
@@ -208,7 +170,8 @@ const DataGrid = ({onSummaryReady}) => {
                     </SelectContent>
                 </Select>
             </div>
-            <div className={"rounded-md border"}>
+            <span className="text-sm text-muted-foreground ml-1">{t("showing")} {((currentPage - 1) * itemsPerPage + 1).toLocaleString()}-{Math.min(currentPage * itemsPerPage, sortedAndFilteredGenerators.length).toLocaleString()} {t("of")} {sortedAndFilteredGenerators.length.toLocaleString()}</span>
+            <div className={"rounded-md border mt-2"}>
                 <Table>
                     <TableHeader>
                         <TableRow>
@@ -268,75 +231,13 @@ const DataGrid = ({onSummaryReady}) => {
 
                     </TableBody>
                 </Table>
-                {sortedAndFilteredGenerators.length > 0 && (
-                    <div className="flex justify-between items-center mt-4 px-2">
-                        <span className="text-sm text-muted-foreground">
-                            {t("showing")} {((currentPage - 1) * itemsPerPage + 1).toLocaleString()}-{Math.min(currentPage * itemsPerPage, sortedAndFilteredGenerators.length).toLocaleString()} {t("of")} {sortedAndFilteredGenerators.length.toLocaleString()}
-                        </span>
-
-                        <div className="join">
-                            <button
-                                className="join-item btn"
-                                onClick={() => setCurrentPage(1)}
-                            >
-                                <ChevronsLeft className={"w-4 h-4"}/>
-                            </button>
-                            <button
-                                className="join-item btn"
-                                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                            >
-                                <ChevronLeft className={"w-4 h-4"} />
-                            </button>
-                            {
-                                currentPage <= 3 && (
-                                    <>
-                                        <button className={cn("join-item btn", currentPage === 1 ? "btn-disabled" : "")} onClick={() => setCurrentPage(1)}>1</button>
-                                        <button className={cn("join-item btn", currentPage === 2 ? "btn-disabled" : "")} onClick={() => setCurrentPage(2)}>2</button>
-                                        <button className={cn("join-item btn", currentPage === 3 ? "btn-disabled" : "")} onClick={() => setCurrentPage(3)}>3</button>
-                                        <button className={cn("join-item btn", currentPage === 4 ? "btn-disabled" : "")} onClick={() => setCurrentPage(4)}>4</button>
-                                        <button className={cn("join-item btn", currentPage === 5 ? "btn-disabled" : "")} onClick={() => setCurrentPage(5)}>5</button>
-                                    </>
-                                )
-                            }
-
-                            {
-                                currentPage > 3 && currentPage < maxPage - 2 && (
-                                    <>
-                                        <button className="join-item btn" onClick={() => setCurrentPage(currentPage - 2)}>{currentPage - 2}</button>
-                                        <button className="join-item btn" onClick={() => setCurrentPage(currentPage - 1)}>{currentPage - 1}</button>
-                                        <button className="join-item btn btn-disabled">{currentPage}</button>
-                                        <button className="join-item btn" onClick={() => setCurrentPage(currentPage + 1)}>{currentPage + 1}</button>
-                                        <button className="join-item btn" onClick={() => setCurrentPage(currentPage + 2)}>{currentPage + 2}</button>
-                                    </>
-                                )
-                            }
-
-                            {
-                                currentPage >= maxPage - 2 && (
-                                    <>
-                                        <button className={cn("join-item btn", currentPage === maxPage - 4 ? "btn-disabled" : "")} onClick={() => setCurrentPage(maxPage - 4 )}>{maxPage - 4}</button>
-                                        <button className={cn("join-item btn", currentPage === maxPage - 3 ? "btn-disabled" : "")} onClick={() => setCurrentPage(maxPage - 3 )}>{maxPage - 3}</button>
-                                        <button className={cn("join-item btn", currentPage === maxPage - 2 ? "btn-disabled" : "")} onClick={() => setCurrentPage(maxPage - 2 )}>{maxPage - 2}</button>
-                                        <button className={cn("join-item btn", currentPage === maxPage - 1 ? "btn-disabled" : "")} onClick={() => setCurrentPage(maxPage - 1 )}>{maxPage - 1}</button>
-                                        <button className={cn("join-item btn", currentPage === maxPage ? "btn-disabled" : "")} onClick={() => setCurrentPage(maxPage)}>{maxPage}</button>
-                                    </>
-                                )
-                            }
-                            <button
-                                className="join-item btn"
-                                onClick={() => setCurrentPage((prev) =>
-                                    prev * itemsPerPage < sortedAndFilteredGenerators.length ? prev + 1 : prev
-                                )}
-                            >
-                                <ChevronRight className={"w-4 h-4"}/>
-                            </button>
-                            <button
-                                className="join-item btn"
-                                onClick={() => setCurrentPage(maxPage)}
-                            >
-                                <ChevronsRight className={"w-4 h-4"} />
-                            </button>
-                        </div>
+                {maxPage > 1 && (
+                    <div className="flex w-full items-center justify-center py-2 border-t-1">
+                        <DataPagination
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
+                            maxPage={maxPage}
+                        />
                     </div>
                 )}
                 {sortedAndFilteredGenerators.length === 0 && (
