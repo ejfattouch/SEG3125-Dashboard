@@ -15,7 +15,7 @@ const HeaderBar = () => {
             <div className={"navbar-start"}>
                 <UtilityPole className={"h-full w-auto m-5"} size={50} />
                 <div>
-                    <h1 className={"font-black text-3xl capitalize"}>{t('header_title')}</h1>
+                    <h1 className={"font-black text-3xl capitalize text-nowrap"}>{t('header_title')}</h1>
                     <p className={"font-semibold text-xl"}>{t('header_subtitle')}</p>
                 </div>
             </div>

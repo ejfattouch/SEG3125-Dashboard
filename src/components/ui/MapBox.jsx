@@ -1,8 +1,9 @@
-import {useRef, useEffect} from "react";
+import {useRef, useEffect, forwardRef, useImperativeHandle} from "react";
 import {useTranslation} from "react-i18next";
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import {createRoot} from "react-dom/client";
+import {cn} from "@/lib/util.js";
 
 const MapPopUp = ({data}) => {
     const {t} = useTranslation();
@@ -15,11 +16,15 @@ const MapPopUp = ({data}) => {
 }
 
 
-const PowerPlantMap = () => {
+const MapBox = forwardRef((_, ref) => {
     const {i18n} = useTranslation();
 
     const mapRef = useRef(null);
     const mapContainerRef = useRef(null);
+
+    useImperativeHandle(ref, () => ({
+        mapbox: mapRef.current,
+    }));
 
     useEffect(() => {
         mapboxgl.accessToken = 'pk.eyJ1IjoiZWZhdHQxMDAiLCJhIjoiY21jdjhqamxyMDg1ejJqb2JtMG91cGFqayJ9.sgOTbraKQflX50pSVJsisQ'
@@ -93,9 +98,8 @@ const PowerPlantMap = () => {
     }, [i18n.language])
 
     return (
-        <>
-            <div ref={mapContainerRef} className="w-full h-200 bg-gray-400" />
-        </>)
-};
+            <div ref={mapContainerRef} className={cn("w-full h-[500px] rounded-box")} />
+    )
+});
 
-export default PowerPlantMap;
+export default MapBox;

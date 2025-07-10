@@ -1,5 +1,15 @@
 {
   "header_title": "Tableau de bord de l'énergie mondiale",
-  "header_subtitle": "Visualisation de la production énergétique dans le monde"
+  "header_subtitle": "Visualisation de la production énergétique dans le monde",
+  "total_power_plants": "Générateurs Totaux",
+  "across_n_countries" : "Dans {{n}} pays",
+  "total_capacity": "Capacité Totale",
+  "combined_gen_capacity": "Capacité de génération combinée",
+  "energy_types": "Types d'énergie",
+  "diff_energy_sources": "Sources d'énergie différentes",
+  "data_grid": "Grille de Données",
+  "interactive_map": "Carte Intéractive",
+  "global_energy_map": "Carte Énergétique Mondiale",
+  "interactive_viz": "Visualisation interactive des générateurs d'énergie dans le monde"
 
 }
