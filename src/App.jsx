@@ -1,14 +1,14 @@
 import React from 'react';
-import MapBox from "@/components/ui/MapBox.jsx";
-import HeaderBar from "@/components/ui/HeaderBar.jsx";
-import DataContainer from "@/components/ui/DataContainer.jsx";
+import MapBox from "@/components/custom/MapBox.jsx";
+import HeaderBar from "@/components/custom/HeaderBar.jsx";
+import MainPageContent from "@/components/custom/MainPageContent.jsx";
 
 function App() {
   return (
     <main className="bg-base-200/40">
       <HeaderBar />
         <div className={"max-w-7xl mx-auto"}>
-            <DataContainer />
+            <MainPageContent />
         </div>
     </main>
   )
