@@ -1,9 +1,12 @@
 import {useRef, useEffect} from "react";
+import {useTranslation} from "react-i18next";
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import {createRoot} from "react-dom/client";
 
 const MapPopUp = ({data}) => {
+    const {t} = useTranslation();
+
     return (
         <div className={"!text-black"}>
             <p>{JSON.stringify(data, null, 2)}</p>
@@ -13,6 +16,8 @@ const MapPopUp = ({data}) => {
 
 
 const PowerPlantMap = () => {
+    const {i18n} = useTranslation();
+
     const mapRef = useRef(null);
     const mapContainerRef = useRef(null);
 
@@ -55,6 +60,37 @@ const PowerPlantMap = () => {
         }
         initMap();
     }, []);
+
+    useEffect(() => {
+        const map = mapRef.current;
+        if (!map) return;
+
+        const setLanguage = () => {
+            const labelLayers = [
+                'state-label',
+                'country-label',
+                'settlement-major-label',
+                'settlement-minor-label',
+            ]
+
+            labelLayers.forEach(l => {
+                mapRef.current.setLayoutProperty(l, 'text-field', [
+                    'get',
+                    `name_${i18n.language}`
+                ])
+            })
+        }
+
+        if (!map.loaded()) {
+            map.on('load', () => {
+                setLanguage();
+            })
+        }
+        else {
+            setLanguage();
+        }
+
+    }, [i18n.language])
 
     return (
         <>
