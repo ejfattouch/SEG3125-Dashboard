@@ -64,8 +64,8 @@ const MapBox = forwardRef((_, ref) => {
                 container: mapContainerRef.current,
                 style: 'mapbox://styles/efatt100/cmcv8q0f600z101s41ewdad1k',
                 center: [-95, 40],
-                zoom: 3,
-                minZoom: 2,
+                zoom: 2,
+                minZoom: 2, // Smaller than this and points disappear
                 maxZoom: 10,
                 projection: 'mercator'
             });
@@ -129,7 +129,7 @@ const MapBox = forwardRef((_, ref) => {
     }, [i18n.language])
 
     return (
-            <div ref={mapContainerRef} className={cn("w-full h-[50vh] rounded-box border-border border-2")} />
+            <div ref={mapContainerRef} className={cn("w-full h-[75vh] rounded-box border-border border-2")} />
     )
 });
 

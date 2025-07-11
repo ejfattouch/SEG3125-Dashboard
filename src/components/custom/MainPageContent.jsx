@@ -68,7 +68,7 @@ const MainPageContent = () => {
 
 
     return (
-        <section className={"py-10 grid grid-cols-1 px-10 items-center gap-7"}>
+        <section className={"py-5 md:py-10 grid grid-cols-1 p-2 md:px-10 items-center gap-7"}>
             <h1>{t("global_data")}</h1>
             <div className={"grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-10"}>
                 <StatCard
@@ -85,7 +85,7 @@ const MainPageContent = () => {
                 />
                 <StatCard
                     title_text={t("energy_types")}
-                    data_text={summary.fuels.size}
+                    data_text={summary.fuels.size + "+"}
                     sub_text={t('diff_energy_sources')}
                     Icon={Funnel}
                 />
@@ -131,8 +131,8 @@ const MainPageContent = () => {
 
                     <section className={cn(selectedTab === "map" ? "block" : "hidden")}>
                         <div className={"card card-border border-2 border-border bg-base-100 w-full"}>
-                            <div className={"card-body "}>
-                                <div className={"mb-4"}>
+                            <div className={"card-body"}>
+                                <div className={"sm:mb-4"}>
                                     <h1 className={"card-title font-black text-2xl"}>
                                         {t("global_energy_map")}
                                     </h1>

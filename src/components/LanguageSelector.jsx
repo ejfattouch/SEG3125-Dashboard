@@ -27,10 +27,10 @@ const LanguageSelector = ({ className }) => {
             <div
                 tabIndex="0"
                 role="button"
-                className="btn btn-ghost border-base-200 uppercase flex w-fit gap-3 px-3"
+                className="btn btn-ghost md:border-base-200 uppercase flex w-fit gap-3 px-3"
             >
                 <Languages className={"h-6"}/>
-                <p className={"text-center text-lg"}>
+                <p className={"text-center text-lg hidden md:block"}>
                     <img className={"inline-block w-6 mb-1 mr-2"} src={flags[currentLang]} alt={"flag"} />
                     {currentLang}
                 </p>
@@ -43,7 +43,7 @@ const LanguageSelector = ({ className }) => {
                         className={"text-nowrap"}
                         onClick={() => handleChange('en')}
                     >
-                        <img className={"w-6"} src={GbFlag} alt={"English"} />EN
+                        <img className={"hidden md:block w-6"} src={GbFlag} alt={"English"} />EN
                     </button>
                 </li>
                 <li>
@@ -51,7 +51,7 @@ const LanguageSelector = ({ className }) => {
                         className={"text-nowrap"}
                         onClick={() => handleChange('fr')}
                     >
-                        <img className={"w-6"} src={FrFlag} alt={"French"} />FR
+                        <img className={"hidden md:block w-6"} src={FrFlag} alt={"French"} />FR
                     </button>
                 </li>
             </ul>

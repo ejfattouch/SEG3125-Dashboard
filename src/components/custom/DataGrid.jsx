@@ -229,7 +229,7 @@ const DataGrid = ({data, filterData}) => {
                             .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
                             .map((generator, i) => (
                             <TableRow key={i}>
-                                <TableCell className={"font-medium"}>{generator.name}</TableCell>
+                                <TableCell className={"font-medium max-w-30 md:max-w-60 overflow-x-clip"}>{generator.name}</TableCell>
                                 <TableCell>{t(`countries.${generator.country_long}`)}</TableCell>
                                 <TableCell>
                                     <Badge className={getTypeColor(generator.primary_fuel)}>{translateType(generator.primary_fuel)}</Badge>

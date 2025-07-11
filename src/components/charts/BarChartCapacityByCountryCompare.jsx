@@ -17,6 +17,17 @@ const BarChartCapacityByCountryCompare = ({data, filterData}) => {
 
     const maxCountries = 5;
 
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 640);
+        checkMobile(); // initial check
+
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+
     useEffect(() => {
         if (!data || data.length === 0) return;
         if (!filterData || filterData.length === 0) return;
@@ -92,9 +103,9 @@ const BarChartCapacityByCountryCompare = ({data, filterData}) => {
     return (
         <div className={"card card-border border-1 border-border bg-base-100 mt-4"}>
             <div className={"card-body"}>
-                <div className={"flex justify-between"}>
-                    <h2 className="card-title text-xl">{t("cap_v_country_title")}</h2>
-                    <div className={"flex gap-2"}>
+                <div className={"grid grid-cols-1 sm:grid-cols-2 gap-2 justify-between"}>
+                    <h2 className="card-title px-1 text-xl">{t("cap_v_country_title")}</h2>
+                    <div className={"flex flex-col sm:flex-row gap-2 sm:place-self-end"}>
                         <Select value={selectCountry} onValueChange={setSelectCountry}>
                             <SelectTrigger className="w-full sm:w-[180px]">
                                 <SelectValue placeholder={t("chose_a_country")} />
@@ -107,24 +118,27 @@ const BarChartCapacityByCountryCompare = ({data, filterData}) => {
                                 ))}
                             </SelectContent>
                         </Select>
-                        <Button
-                            variant="outline"
-                            size="icon"
-                            className={"shrink-0 bg-transparent"}
-                            onClick={addCountry}
-                            disabled={selectedCountries.length >= maxCountries}
-                        >
-                            <Plus className={"h-4 w-4"}></Plus>
-                        </Button>
-                        <Button
-                            variant="outline"
-                            size="icon"
-                            className={"shrink-0 bg-transparent"}
-                            onClick={removeLastCountry}
-                            disabled={selectedCountries.length === 0}
-                        >
-                            <Minus className={"h-4 w-4"}></Minus>
-                        </Button>
+                        <div className={"flex w-full sm:w-fit gap-1 sm:justify-end"}>
+                            <Button
+                                variant="outline"
+                                size="icon"
+                                className={"grow sm:grow-0 shrink-0 bg-transparent"}
+                                onClick={addCountry}
+                                disabled={selectedCountries.length >= maxCountries}
+                            >
+                                <Plus className={"h-4 w-4"}></Plus>
+                            </Button>
+                            <Button
+                                variant="outline"
+                                size="icon"
+                                className={"grow sm:grow-0 shrink-0 bg-transparent"}
+                                onClick={removeLastCountry}
+                                disabled={selectedCountries.length === 0}
+                            >
+                                <Minus className={"h-4 w-4"}></Minus>
+                            </Button>
+                        </div>
+
                     </div>
                 </div>
                 <ChartContainer
@@ -155,7 +169,7 @@ const BarChartCapacityByCountryCompare = ({data, filterData}) => {
                                         interval={0}
                                         tickFormatter={(value) => t(`countries.${value}`) || value}
                                     />
-                                    <YAxis />
+                                    {!isMobile && <YAxis />}
                                     {selectedCountries.length > 0 && (
                                         <ChartTooltip content={<ChartTooltipContent lowerCaseLabel={false} labelPrefix={"countries."} />} />
                                     )}

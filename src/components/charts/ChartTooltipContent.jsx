@@ -7,7 +7,6 @@ const ChartTooltipContent = ({active, payload, label, labelPrefix , lowerCaseLab
 
     const unTLabel = `${labelPrefix ? labelPrefix : ''}${label}`;
     const textLabel = lowerCaseLabel ? t(unTLabel.toLowerCase()) : t(unTLabel);
-    console.log(textLabel);
 
     return (
         <div className={"rounded bg-base-100 px-3 py-2 text-sm shadow"}>

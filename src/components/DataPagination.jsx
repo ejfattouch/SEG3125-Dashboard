@@ -21,7 +21,7 @@ const DataPagination = ({className, maxPage, currentPage, setCurrentPage}) => {
     const visiblePages = getVisiblePages(currentPage, maxPage);
 
     return (
-        <div className={cn("join [&_*]:shadow-none", className)}>
+        <div className={cn("join [&_*]:shadow-none [&_*]:btn-xs md:[&_*]:btn-sm", className)}>
             {/* First Page */}
             <button
                 className="join-item btn btn-sm btn-neutral"

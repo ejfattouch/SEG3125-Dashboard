@@ -11,6 +11,16 @@ const BarChartCapacityByEnergyType = ({data, filterData}) => {
     const [dataSet, setDataSet] = useState({});
     const [selectCountry, setSelectCountry] = useState("all");
 
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 640);
+        checkMobile(); // initial check
+
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     useEffect(() => {
         if (!data || data.length === 0) return;
 
@@ -74,10 +84,10 @@ const BarChartCapacityByEnergyType = ({data, filterData}) => {
     return (
         <div className={"card card-border border-1 border-border  mt-4"}>
             <div className={"card-body"}>
-                <div className={"flex justify-between"}>
-                    <h2 className="card-title text-xl">{t("cap_v_type_title")}</h2>
+                <div className={"grid grid-cols-1 sm:grid-cols-2 gap-2 justify-between"}>
+                    <h2 className="card-title text-xl px-1">{t("cap_v_type_title")}</h2>
                     <Select value={selectCountry} onValueChange={setSelectCountry}>
-                        <SelectTrigger className="w-full sm:w-[180px]">
+                        <SelectTrigger className="w-full md:w-[160px] place-self-end">
                             <SelectValue placeholder={t("filter_by_country")} />
                         </SelectTrigger>
                         <SelectContent className={"max-h-60 overflow-y-auto"} align="end">
@@ -110,7 +120,7 @@ const BarChartCapacityByEnergyType = ({data, filterData}) => {
                         >
                             <CartesianGrid strokeDasharray="3 3"/>
                             <XAxis dataKey="type"angle={-45} textAnchor="end"height={60} fontSize={10} interval={0} />
-                            <YAxis />
+                            {!isMobile && <YAxis />}
                             <ChartTooltip content={<ChartTooltipContent />} />
                             <Bar dataKey="capacity">
                                 {Object.entries(dataSet.all).map(([type]) => (
