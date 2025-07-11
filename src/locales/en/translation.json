@@ -219,5 +219,6 @@
   "no_data_selected": "No countries selected. Please add a country to compare.",
   "owner": "Owner",
   "estimated_gen": "Estimated Generation (2017)",
-  "capacity_no_mw": "Capacity"
+  "capacity_no_mw": "Capacity",
+  "copyright_ej": "Designed by Edward-Joseph Fattouch | With data taken from the "
 }

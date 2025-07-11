@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {Bar, BarChart, CartesianGrid, Cell, ResponsiveContainer, XAxis, YAxis} from "recharts";
 import {ChartContainer, ChartTooltip} from "@/components/ui/chart.jsx";
-import ChartTooltipContent from "@/components/ChartTooltipContent.jsx";
+import ChartTooltipContent from "@/components/charts/ChartTooltipContent.jsx";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.jsx";
 
 const BarChartCapacityByEnergyType = ({data, filterData}) => {

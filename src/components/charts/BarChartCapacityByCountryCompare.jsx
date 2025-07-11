@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {Bar, BarChart, CartesianGrid, Cell, ResponsiveContainer, XAxis, YAxis} from "recharts";
 import {ChartContainer, ChartTooltip} from "@/components/ui/chart.jsx";
-import ChartTooltipContent from "@/components/ChartTooltipContent.jsx";
+import ChartTooltipContent from "@/components/charts/ChartTooltipContent.jsx";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.jsx";
 import {Button} from "@/components/ui/button.jsx";
 import {Plus, Minus} from "lucide-react";
@@ -146,10 +146,18 @@ const BarChartCapacityByCountryCompare = ({data, filterData}) => {
                                     data={selectedCountries.length > 0 ? selectedCountries : [{country: "", capacity: 0}]}
                                 >
                                     <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="country" angle={-45} textAnchor="end" height={60} fontSize={10} interval={0} />
+                                    <XAxis
+                                        dataKey="country"
+                                        angle={-45}
+                                        textAnchor="end"
+                                        height={60}
+                                        fontSize={10}
+                                        interval={0}
+                                        tickFormatter={(value) => t(`countries.${value}`) || value}
+                                    />
                                     <YAxis />
                                     {selectedCountries.length > 0 && (
-                                        <ChartTooltip content={<ChartTooltipContent />} />
+                                        <ChartTooltip content={<ChartTooltipContent lowerCaseLabel={false} labelPrefix={"countries."} />} />
                                     )}
                                     <Bar dataKey="capacity" fill={"var(--color-capacity)"} barSize={100}>
                                         {selectedCountries.map((entry, index) => (
