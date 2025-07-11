@@ -37,42 +37,42 @@ const BarChartCapacityByEnergyType = ({data, filterData}) => {
     const getTypeColor =  (type) => {
         switch (type) {
             case "Nuclear":
-                return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
+                return "text-red-800"
             case "Hydro":
-                return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300"
+                return "text-blue-800"
             case "Wind":
-                return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300"
+                return "text-green-800"
             case "Solar":
-                return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300"
+                return "text-yellow-800"
             case "Gas":
-                return "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300"
+                return "text-orange-800"
             case "Coal":
-                return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                return "text-gray-800"
             case "Oil":
-                return "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300"
+                return "text-purple-800"
             case "Geothermal":
-                return "bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-300"
+                return "text-pink-800"
             case "Biomass":
-                return "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300"
+                return "text-emerald-800"
             case "Waste":
-                return "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-300"
+                return "text-amber-800"
             case "Wave and Tidal":
-                return "bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-300"
+                return "text-cyan-800"
             case "Storage":
-                return "bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300"
+                return "text-indigo-800"
             case "Cogeneration":
-                return "bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-300"
+                return "text-teal-800"
             case "Petcoke":
-                return "bg-slate-100 text-slate-800 dark:bg-slate-900 dark:text-slate-300"
+                return "text-slate-800"
             default:
-                return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                return "text-gray-800"
         }
     }
 
     const loading = dataSet === null || Object.keys(dataSet).length === 0;
 
     return (
-        <div className={"card card-border border-1 border-border bg-base-100 mt-4"}>
+        <div className={"card card-border border-1 border-border  mt-4"}>
             <div className={"card-body"}>
                 <div className={"flex justify-between"}>
                     <h2 className="card-title text-xl">{t("cap_v_type_title")}</h2>
@@ -101,15 +101,15 @@ const BarChartCapacityByEnergyType = ({data, filterData}) => {
                 >
                 { loading ? (
                     <div className="flex h-[250px] w-full items-center justify-center">
-                        <span className="loading loading-spinner loading-lg text-primary" />
+                        <span className="loading loading-spinner loading-lg text-primary"/>
                     </div>) :
                         (
-                    <ResponsiveContainer width="100%" height="100%">
+                    <ResponsiveContainer width="100%"height="100%">
                         <BarChart
                             data={Object.entries(dataSet[selectCountry]).map(([type, capacity]) => ({ type: t(type.toLowerCase()), capacity: Math.round(capacity) }))}
                         >
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="type" angle={-45} textAnchor="end" height={60} fontSize={10} interval={0} />
+                            <CartesianGrid strokeDasharray="3 3"/>
+                            <XAxis dataKey="type"angle={-45} textAnchor="end"height={60} fontSize={10} interval={0} />
                             <YAxis />
                             <ChartTooltip content={<ChartTooltipContent />} />
                             <Bar dataKey="capacity">

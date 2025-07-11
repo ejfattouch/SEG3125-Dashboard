@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {Search, ChevronUp, ChevronDown} from "lucide-react";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
@@ -21,10 +21,17 @@ const DataGrid = ({data, filterData}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 50;
 
+    const scrollContainerRef = useRef(null);
 
     useEffect(() => {
         setCurrentPage(1);
     }, [data]);
+
+    useEffect(() => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollTop=0;
+        }
+    }, [currentPage])
 
     const getTypeColor =  (type) => {
         switch (type) {
@@ -171,9 +178,12 @@ const DataGrid = ({data, filterData}) => {
                 </Select>
             </div>
             <span className="text-sm text-muted-foreground ml-1">{t("showing")} {((currentPage - 1) * itemsPerPage + 1).toLocaleString()}-{Math.min(currentPage * itemsPerPage, sortedAndFilteredGenerators.length).toLocaleString()} {t("of")} {sortedAndFilteredGenerators.length.toLocaleString()}</span>
-            <div className={"rounded-md border mt-2"}>
-                <Table>
-                    <TableHeader>
+            <div className={"relative rounded-md border mt-2"}>
+                <Table
+                    containerClassName={"h-fit max-h-200 overflow-y-auto"}
+                    ref={scrollContainerRef}
+                >
+                    <TableHeader className={"sticky top-0 drop-shadow-sm bg-base-100"}>
                         <TableRow>
                             <TableHead
                                 className="cursor-pointer hover:bg-muted/50 select-none"
@@ -231,19 +241,20 @@ const DataGrid = ({data, filterData}) => {
 
                     </TableBody>
                 </Table>
-                {maxPage > 1 && (
-                    <div className="flex w-full items-center justify-center py-2 border-t-1">
-                        <DataPagination
-                            currentPage={currentPage}
-                            setCurrentPage={setCurrentPage}
-                            maxPage={maxPage}
-                        />
-                    </div>
-                )}
                 {sortedAndFilteredGenerators.length === 0 && (
                     <div className="text-center py-8 text-muted-foreground">{t("no_results")}</div>
                 )}
             </div>
+
+            {maxPage > 1 && (
+                <div className="flex w-full items-center justify-center">
+                    <DataPagination
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                        maxPage={maxPage}
+                    />
+                </div>
+            )}
         </div>
     )
 }
