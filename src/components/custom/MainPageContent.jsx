@@ -1,5 +1,5 @@
 import {useTranslation} from "react-i18next";
-import {Zap, Battery, Funnel, MapPin} from 'lucide-react';
+import {Zap, Battery, Funnel} from 'lucide-react';
 import StatCard from "@/components/StatCard.jsx";
 import {cn} from "@/lib/util.js";
 import MapBox from "@/components/custom/MapBox.jsx";
@@ -7,6 +7,7 @@ import {useEffect, useRef, useState} from "react";
 import DataGrid from "@/components/custom/DataGrid.jsx";
 import useFetch from "@/hooks/useFetch.jsx";
 import BarChartCapacityByEnergyType from "@/components/charts/BarChartCapacityByEnergyType.jsx";
+import BarChartCapacityByCountryCompare from "@/components/charts/BarChartCapacityByCountryCompare.jsx";
 
 const MainPageContent = () => {
     const {t} = useTranslation();
@@ -122,6 +123,7 @@ const MainPageContent = () => {
                                     <h1 className={"card-title font-black text-2xl"}>{t("data_viz")}</h1>
                                     <h1 className={"font-light text-lg"}>{t("interactive_charts")}</h1>
                                     <BarChartCapacityByEnergyType data={data} filterData={filterData} />
+                                    <BarChartCapacityByCountryCompare data={data} filterData={filterData} />
                                 </div>
                             </div>
                         </div>
@@ -133,7 +135,6 @@ const MainPageContent = () => {
                                 <div className={"mb-4"}>
                                     <h1 className={"card-title font-black text-2xl"}>
                                         {t("global_energy_map")}
-                                        <MapPin className={"w-7 h-7 text-neutral/80"} />
                                     </h1>
                                     <h1 className={"font-light text-lg"}>{t("interactive_viz")}</h1>
                                 </div>

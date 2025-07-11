@@ -97,10 +97,10 @@ const BarChartCapacityByEnergyType = ({data, filterData}) => {
                             color: "hsl(var(--chart-1))",
                         },
                     }}
-                    className="h-[250px] w-full"
+                    className="h-[400px] w-full"
                 >
                 { loading ? (
-                    <div className="flex h-[250px] w-full items-center justify-center">
+                    <div className="flex h-[400px] w-full items-center justify-center">
                         <span className="loading loading-spinner loading-lg text-primary"/>
                     </div>) :
                         (

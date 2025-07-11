@@ -18,6 +18,7 @@
   "all_types": "Tous les Types",
   "filter_by_country": "Filtrer par le pays",
   "all_countries": "Tous les Pays",
+  "chose_a_country": "Chosissez un pays",
   "hydro": "Hydraulique",
   "solar": "Solaire",
   "gas": "Gaz",
@@ -213,5 +214,7 @@
   "of": "de",
   "data_viz": "Visualisations des Données",
   "interactive_charts": "Graphiques interactifs et analyses des données énergétiques mondiales",
-  "cap_v_type_title": "Capacité par Type d'Énergie"
+  "cap_v_type_title": "Capacité par Type d'Énergie",
+  "cap_v_country_title": "Capacité par Pays",
+  "no_data_selected": "Aucun pays sélectionné. Veuillez ajouter un pays à comparer."
 }
