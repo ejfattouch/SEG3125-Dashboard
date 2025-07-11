@@ -210,5 +210,8 @@
   "no_results": "Aucun générateur trouvé correspondant à vos critères.",
   "global_data": "Apperçu Des Données Globales",
   "showing": "Affichant",
-  "of": "de"
+  "of": "de",
+  "data_viz": "Visualisations des Données",
+  "interactive_charts": "Graphiques interactifs et analyses des données énergétiques mondiales",
+  "cap_v_type_title": "Capacité par Type d'Énergie"
 }

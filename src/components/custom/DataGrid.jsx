@@ -146,7 +146,7 @@ const DataGrid = ({data, filterData}) => {
                     <SelectTrigger className="w-full sm:w-[180px]">
                         <SelectValue placeholder={t("filter_by_type")} />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className={"max-h-60 overflow-y-auto"} align="end">
                         <SelectItem value="all">{t("all_types")}</SelectItem>
                         {filterData.fuelTypes.map((type) => (
                             <SelectItem key={type} value={type}>
@@ -160,7 +160,7 @@ const DataGrid = ({data, filterData}) => {
                     <SelectTrigger className="w-full sm:w-[180px]">
                         <SelectValue placeholder={t("filter_by_country")} />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className={"max-h-60 overflow-y-auto"} align="end">
                         <SelectItem value="all">{t("all_countries")}</SelectItem>
                         {filterData.countries.map((country) => (
                             <SelectItem key={country} value={country}>
@@ -217,8 +217,8 @@ const DataGrid = ({data, filterData}) => {
                     <TableBody>
                         {sortedAndFilteredGenerators
                             .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
-                            .map((generator) => (
-                            <TableRow key={generator.id}>
+                            .map((generator, i) => (
+                            <TableRow key={i}>
                                 <TableCell className={"font-medium"}>{generator.name}</TableCell>
                                 <TableCell>{t(`countries.${generator.country_long}`)}</TableCell>
                                 <TableCell>

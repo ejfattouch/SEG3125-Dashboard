@@ -210,5 +210,8 @@
   "no_results": "No generators found matching your criteria.",
   "global_data": "Global Data Overview",
   "showing": "Showing",
-  "of": "of"
+  "of": "of",
+  "data_viz": "Data Visualisations",
+  "interactive_charts": "Interactive charts and analytics of global energy data",
+  "cap_v_type_title": "Capacity by Energy Type"
 }

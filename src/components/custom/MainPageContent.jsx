@@ -6,6 +6,7 @@ import MapBox from "@/components/custom/MapBox.jsx";
 import {useEffect, useRef, useState} from "react";
 import DataGrid from "@/components/custom/DataGrid.jsx";
 import useFetch from "@/hooks/useFetch.jsx";
+import BarChartCapacityByEnergyType from "@/components/charts/BarChartCapacityByEnergyType.jsx";
 
 const MainPageContent = () => {
     const {t} = useTranslation();
@@ -105,18 +106,30 @@ const MainPageContent = () => {
 
                 <div className={"mt-5"}>
 
-
-                    <div className={"card card-border bg-base-100 w-full"}>
-                        <div className={"card-body "}>
-                            <div className={cn(selectedTab === "grid" ? "block" : "hidden")}>
+                    <section className={cn("flex-col gap-5", selectedTab === "grid" ? "flex" : "hidden")}>
+                        <div className={"card card-border border-2 border-border bg-base-100 w-full"}>
+                            <div className={"card-body"}>
                                 <div>
                                     <h1 className={"card-title font-black text-2xl"}>{t("energy_gen_db")}</h1>
                                     <h1 className={"font-light text-lg"}>{t("comprehensive_data")}</h1>
                                 </div>
                                 <DataGrid data={data} filterData={filterData} />
                             </div>
+                        </div>
+                        <div className={"card card-border border-2 border-border bg-base-100 w-full"}>
+                            <div className={"card-body"}>
+                                <div>
+                                    <h1 className={"card-title font-black text-2xl"}>{t("data_viz")}</h1>
+                                    <h1 className={"font-light text-lg"}>{t("interactive_charts")}</h1>
+                                    <BarChartCapacityByEnergyType data={data} filterData={filterData} />
+                                </div>
+                            </div>
+                        </div>
+                    </section>
 
-                            <div className={cn(selectedTab === "map" ? "block" : "hidden")}>
+                    <section className={cn(selectedTab === "map" ? "block" : "hidden")}>
+                        <div className={"card card-border border-2 border-border bg-base-100 w-full"}>
+                            <div className={"card-body "}>
                                 <div className={"mb-4"}>
                                     <h1 className={"card-title font-black text-2xl"}>
                                         {t("global_energy_map")}
@@ -127,8 +140,7 @@ const MainPageContent = () => {
                                 <MapBox ref={mapRef} />
                             </div>
                         </div>
-                    </div>
-
+                    </section>
                 </div>
             </div>
 
