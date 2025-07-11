@@ -205,7 +205,7 @@
   },
   "name": "Nom",
   "country": "Pays",
-  "type": "Type",
+  "type": "Type de Carburant",
   "capacity": "Capacité (MW)",
   "year_built": "Année de Commission",
   "no_results": "Aucun générateur trouvé correspondant à vos critères.",
@@ -216,5 +216,8 @@
   "interactive_charts": "Graphiques interactifs et analyses des données énergétiques mondiales",
   "cap_v_type_title": "Capacité par Type d'Énergie",
   "cap_v_country_title": "Capacité par Pays",
-  "no_data_selected": "Aucun pays sélectionné. Veuillez ajouter un pays à comparer."
+  "no_data_selected": "Aucun pays sélectionné. Veuillez ajouter un pays à comparer.",
+  "owner": "Propriétaire",
+  "estimated_gen": "Génération estimée (2017)",
+  "capacity_no_mw": "Capacité"
 }

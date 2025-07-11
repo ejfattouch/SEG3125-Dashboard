@@ -205,7 +205,7 @@
   },
   "name": "Name",
   "country": "Country",
-  "type": "Type",
+  "type": "Fuel Type",
   "capacity": "Capacity (MW)",
   "year_built": "Year of Commission",
   "no_results": "No generators found matching your criteria.",
@@ -216,5 +216,8 @@
   "interactive_charts": "Interactive charts and analytics of global energy data",
   "cap_v_type_title": "Capacity by Energy Type",
   "cap_v_country_title": "Capacity by Countries",
-  "no_data_selected": "No countries selected. Please add a country to compare."
+  "no_data_selected": "No countries selected. Please add a country to compare.",
+  "owner": "Owner",
+  "estimated_gen": "Estimated Generation (2017)",
+  "capacity_no_mw": "Capacity"
 }
