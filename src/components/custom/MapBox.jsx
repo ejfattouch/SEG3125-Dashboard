@@ -1,4 +1,4 @@
-import {useRef, useEffect, forwardRef, useImperativeHandle, useState} from "react";
+import {useRef, useEffect, forwardRef, useImperativeHandle} from "react";
 import {useTranslation} from "react-i18next";
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -25,7 +25,7 @@ const MapPopUp = ({data}) => {
             "name": cleanText(data.name),
             "type": t(data.primary_fuel.toLowerCase()),
             "capacity_no_mw": Math.round(data.capacity_mw) + " MW",
-            "year_built": Math.floor(data.commissioning_year),
+            "year_built": Math.floor(data.commissioning_year) ? Math.floor(data.commissioning_year) : null,
             "owner": cleanText(data.owner),
             "estimated_gen" : estimatedGen
         }
