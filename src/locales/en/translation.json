@@ -1,4 +1,7 @@
 {
+  "app": {
+    "title": "Global Energy Dashboard"
+  },
   "header_title": "Global Energy Dashboard",
   "header_subtitle": "Visualize the world's energy generation",
   "total_power_plants": "Total Power Plants",

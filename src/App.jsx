@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import HeaderBar from "@/components/custom/HeaderBar.jsx";
 import MainPageContent from "@/components/custom/MainPageContent.jsx";
 import {useTranslation} from "react-i18next";
 
 function App() {
-    const {t} = useTranslation();
+    const {t, i18n} = useTranslation();
+
+    useEffect(() => {
+        document.title = t('app.title')
+    }, [i18n.language, t]);
 
     return (
         <main className="bg-base-200/40 min-h-screen">
